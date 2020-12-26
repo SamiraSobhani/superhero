@@ -5,19 +5,19 @@ import java.util.Objects;
 
 public class Superhero {
 
-    private int superhero_id;
+    private int id;
     private String name;
     private String description;
-    private String superpower;
+    private List<Superpower> superpowers;
     private List<Organization> organizations;
 
 
-    public int getSuperhero_id() {
-        return superhero_id;
+    public int getId() {
+        return id;
     }
 
-    public void setSuperhero_id(int superhero_id) {
-        this.superhero_id = superhero_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -36,12 +36,12 @@ public class Superhero {
         this.description = description;
     }
 
-    public String getSuperpower() {
-        return superpower;
+    public List<Superpower> getSuperpowers() {
+        return superpowers;
     }
 
-    public void setSuperpower(String superpower) {
-        this.superpower = superpower;
+    public void setSuperpowers(List<Superpower> superpowers) {
+        this.superpowers = superpowers;
     }
 
     public List<Organization> getOrganizations() {
@@ -57,15 +57,26 @@ public class Superhero {
         if (this == o) return true;
         if (!(o instanceof Superhero)) return false;
         Superhero superhero = (Superhero) o;
-        return getSuperhero_id() == superhero.getSuperhero_id() &&
+        return getId() == superhero.getId() &&
                 getName().equals(superhero.getName()) &&
                 Objects.equals(getDescription(), superhero.getDescription()) &&
-                getSuperpower().equals(superhero.getSuperpower()) &&
+                getSuperpowers().equals(superhero.getSuperpowers()) &&
                 getOrganizations().equals(superhero.getOrganizations());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getSuperhero_id(), getName(), getDescription(), getSuperpower(), getOrganizations());
+        return Objects.hash(getId(), getName(), getDescription(), getSuperpowers(), getOrganizations());
+    }
+
+    @Override
+    public String toString() {
+        return "Superhero{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", superpowers=" + superpowers +
+                ", organizations=" + organizations +
+                '}';
     }
 }

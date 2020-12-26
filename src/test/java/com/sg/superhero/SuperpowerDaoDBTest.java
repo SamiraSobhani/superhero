@@ -15,8 +15,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class OrganizationDaoDBTest {
-
+public class SuperpowerDaoDBTest {
     @Autowired
     LocationDao locationDao;
     @Autowired
@@ -28,11 +27,11 @@ public class OrganizationDaoDBTest {
     @Autowired
     SuperpowerDao superpowerDao;
 
-    public OrganizationDaoDBTest() {
+    public SuperpowerDaoDBTest() {
     }
 
     @BeforeClass
-    public static void setupClass() {
+    public static void setUpClass() {
     }
 
     @AfterClass
@@ -40,7 +39,7 @@ public class OrganizationDaoDBTest {
     }
 
     @Before
-    public void setup() {
+    public void setUp() {
         List<Location> locations = locationDao.getAllLocation();
         for (Location location : locations) {
             locationDao.deleteLocationById(location.getId());
@@ -53,6 +52,10 @@ public class OrganizationDaoDBTest {
         for (Organization organization : organizations) {
             organizationDao.deleteOrganizationById(organization.getId());
         }
+        List<Superpower> superpowers = superpowerDao.getAllSuperpowers();
+        for (Superpower superpower : superpowers) {
+            superpowerDao.deleteSuperpowerById(superpower.getId());
+        }
         List<Sighting> sightings = sightingDao.getAllSightings();
         for (Sighting sighting : sightings) {
             sightingDao.deleteSightingByDate(sighting.getDate());
@@ -64,61 +67,52 @@ public class OrganizationDaoDBTest {
     }
 
     @Test
-    public void testAddAndGetOrganization() {
-        Organization organization = new Organization();
-        organization.setName("Test org Name");
-        organization.setDescription("Test org Desc");
-        organization.setContact("Test contact");
-        organization = organizationDao.addOrganization(organization);
+    public void testAddAndGetSuperpower() {
 
-        Organization fromDao = organizationDao.getOrganizationById(organization.getId());
-        assertEquals(organization, fromDao);
+        Superpower superpower = new Superpower();
+        superpower.setName("test sup pow name");
+        superpower = superpowerDao.addSuperpower(superpower);
+
+        Superpower fromDao = superpowerDao.getSuperpowerById(superpower.getId());
+        assertEquals(superpower, fromDao);
     }
 
     @Test
-    public void testGetAllOrganization() {
+    public void testGetAllSuperpowers() {
+        Superpower superpower = new Superpower();
+        superpower.setName("test sup pow name");
+        superpower = superpowerDao.addSuperpower(superpower);
 
-        Organization organization = new Organization();
-        organization.setName("Test org Name");
-        organization.setDescription("Test org Desc");
-        organization.setContact("Test contact");
-        organization = organizationDao.addOrganization(organization);
+        Superpower superpower2 = new Superpower();
+        superpower2.setName("test sup pow name");
+        superpower2 = superpowerDao.addSuperpower(superpower2);
 
-        Organization organization2 = new Organization();
-        organization2.setName("Test org Name2");
-        organization2.setDescription("Test org Desc2");
-        organization2.setContact("Test contact2");
-        organization2 = organizationDao.addOrganization(organization2);
-
-        List<Organization> organizations = organizationDao.getAllOrganization();
-
-        assertEquals(2, organizations.size());
-        assertTrue(organizations.contains(organization));
-        assertTrue(organizations.contains(organization2));
+        List<Superpower> superpowers = superpowerDao.getAllSuperpowers();
+        assertEquals(2, superpowers.size());
+        assertTrue(superpowers.contains(superpower));
+        assertTrue(superpowers.contains(superpower2));
     }
 
     @Test
-    public void testUpdateOrganization() {
-        Organization organization = new Organization();
-        organization.setName("Test org Name");
-        organization.setDescription("Test org Desc");
-        organization.setContact("Test contact");
-        organization = organizationDao.addOrganization(organization);
+    public void testUpdateSuperpower() {
+        Superpower superpower = new Superpower();
+        superpower.setName("test sup pow name");
+        superpower = superpowerDao.addSuperpower(superpower);
 
-        Organization fromDao = organizationDao.getOrganizationById(organization.getId());
-        assertEquals(organization, fromDao);
+        Superpower fromDao = superpowerDao.getSuperpowerById(superpower.getId());
+        assertEquals(superpower, fromDao);
 
-        organization.setName("new test org name");
-        organizationDao.updateOrganization(organization);
+        superpower.setName("test update name");
+        superpowerDao.updateSuperpower(superpower);
+        assertNotEquals(superpower, fromDao);
 
-        assertNotEquals(organization, fromDao);
-        fromDao = organizationDao.getOrganizationById(organization.getId());
-        assertEquals(organization, fromDao);
+        fromDao = superpowerDao.getSuperpowerById(superpower.getId());
+        assertEquals(superpower, fromDao);
+
     }
 
     @Test
-    public void testDeleteOrganizationById() {
-
+    public void testDeleteSuperpower() {
         Organization organization = new Organization();
         organization.setName("Test org Name");
         organization.setDescription("Test org Desc");
@@ -140,14 +134,12 @@ public class OrganizationDaoDBTest {
         superhero.setOrganizations(organizations);
         superhero = superheroDao.addSuperhero(superhero);
 
-        Organization fromDao = organizationDao.getOrganizationById(organization.getId());
-        assertEquals(organization, fromDao);
+        Superpower fromDao = superpowerDao.getSuperpowerById(superpower.getId());
+        assertEquals(superpower, fromDao);
 
-        organizationDao.deleteOrganizationById(organization.getId());
-        fromDao = organizationDao.getOrganizationById(organization.getId());
+        superpowerDao.deleteSuperpowerById(superpower.getId());
+        fromDao = superpowerDao.getSuperpowerById(superpower.getId());
         assertNull(fromDao);
 
     }
-
-
 }

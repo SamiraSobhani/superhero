@@ -1,8 +1,6 @@
 package com.sg.superhero.DAO;
 
-import com.sg.superhero.DTO.Location;
 import com.sg.superhero.DTO.Sighting;
-import com.sg.superhero.DTO.Superhero;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,7 +21,10 @@ public class SightingDaoDB implements SightingDao {
     @Override
     public Sighting addSighting(Sighting sighting) {
         final String ADD_SIGHTING = "INSERT into location_superhero (superhero_id, location_id, date) values(?,?,?)";
-        jdbc.update(ADD_SIGHTING, sighting.getSuperhero_id(), sighting.getLocation_id());
+        jdbc.update(ADD_SIGHTING,
+                sighting.getSuperhero_id(),
+                sighting.getLocation_id(),
+                sighting.getDate());
         return sighting;
     }
 
@@ -54,9 +55,12 @@ public class SightingDaoDB implements SightingDao {
     public void updateSighting(Sighting sighting) {
         final String UPDATE_SIGHTING = "UPDATE LOCATION_SUPERHERO SET location_id=?, superhero_id=?,date=?";
         jdbc.update(UPDATE_SIGHTING,
+                sighting.getLocation_id(),
                 sighting.getSuperhero_id(),
-                sighting.getLocation_id());
+                sighting.getDate());
     }
+
+
 
     public static final class SightingMapper implements RowMapper<Sighting> {
         @Override
@@ -68,4 +72,5 @@ public class SightingDaoDB implements SightingDao {
             return sighting;
         }
     }
+
 }

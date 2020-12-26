@@ -1,23 +1,22 @@
 package com.sg.superhero.DTO;
 
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Location {
-    private int location_id;
+    private int id;
     private String name;
     private String description;
     private String address;
     private double latitude;
     private double longitude;
 
-    public int getLocation_id() {
-        return location_id;
+    public int getId() {
+        return id;
     }
 
-    public void setLocation_id(int location_id) {
-        this.location_id = location_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -65,7 +64,7 @@ public class Location {
         if (this == o) return true;
         if (!(o instanceof Location)) return false;
         Location location = (Location) o;
-        return getLocation_id() == location.getLocation_id() &&
+        return getId() == location.getId() &&
                 Double.compare(location.getLatitude(), getLatitude()) == 0 &&
                 Double.compare(location.getLongitude(), getLongitude()) == 0 &&
                 getName().equals(location.getName()) &&
@@ -75,6 +74,6 @@ public class Location {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getLocation_id(), getName(), getDescription(), getAddress(), getLatitude(), getLongitude());
+        return Objects.hash(getId(), getName(), getDescription(), getAddress(), getLatitude(), getLongitude());
     }
 }

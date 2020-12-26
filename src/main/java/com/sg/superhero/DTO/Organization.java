@@ -1,6 +1,5 @@
 package com.sg.superhero.DTO;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Organization {
@@ -8,15 +7,6 @@ public class Organization {
     private String name;
     private String description;
     private String contact;
-    private List<Superhero> members;
-
-    public List<Superhero> getMembers() {
-        return members;
-    }
-
-    public void setMembers(List<Superhero> members) {
-        this.members = members;
-    }
 
 
     public int getId() {
@@ -59,12 +49,11 @@ public class Organization {
         return getId() == that.getId() &&
                 getName().equals(that.getName()) &&
                 Objects.equals(getDescription(), that.getDescription()) &&
-                Objects.equals(getContact(), that.getContact()) &&
-                getMembers().equals(that.getMembers());
+                getContact().equals(that.getContact());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getDescription(), getContact(), getMembers());
+        return Objects.hash(getId(), getName(), getDescription(), getContact());
     }
 }

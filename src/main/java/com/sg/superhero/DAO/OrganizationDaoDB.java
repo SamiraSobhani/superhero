@@ -23,7 +23,7 @@ public class OrganizationDaoDB implements OrganizationDao {
     public Organization getOrganizationById(int id) {
         try {
             final String GET_ORGANIZATION_BY_ID = "select * from organization where id=?";
-            return jdbc.queryForObject(GET_ORGANIZATION_BY_ID, new OrganizationDaoDB.OrganizationMapper(), id);
+            return jdbc.queryForObject(GET_ORGANIZATION_BY_ID, new OrganizationMapper(), id);
         } catch (DataAccessException ex) {
             return null;
         }
@@ -32,7 +32,8 @@ public class OrganizationDaoDB implements OrganizationDao {
     @Override
     public List<Organization> getAllOrganization() {
         final String GET_ALL_ORGANIZATION = "select * from organization";
-        return jdbc.query(GET_ALL_ORGANIZATION, new OrganizationDaoDB.OrganizationMapper());
+        List<Organization> organizations = jdbc.query(GET_ALL_ORGANIZATION, new OrganizationMapper());
+        return organizations;
     }
 
     @Override
@@ -50,15 +51,16 @@ public class OrganizationDaoDB implements OrganizationDao {
         return organization;
     }
 
-    private List<Superhero> getMembersForOrganization(int id){
-        final String GET_MEMBERS_FOR_ORGANIZATION="SELECT S.* FROM SUPERHERO S JOIN ORGANIZATION_SUPERHERO OS ON OS.SUPERHERO_ID=S.SUPERHERO_ID WHERE OS.ID=? ";
-        return jdbc.query(GET_MEMBERS_FOR_ORGANIZATION,new SuperheroDaoDB.SuperheroMapper(),id);
+    private List<Superhero> getMembersForOrganization(int id) {
+        final String GET_MEMBERS_FOR_ORGANIZATION = "SELECT S.* FROM SUPERHERO S " +
+                "JOIN ORGANIZATION_SUPERHERO OS ON OS.SUPERHERO_ID=S.ID WHERE ID=? ";
+        return jdbc.query(GET_MEMBERS_FOR_ORGANIZATION, new SuperheroDaoDB.SuperheroMapper(), id);
     }
 
     @Override
     @Transactional
     public void deleteOrganizationById(int id) {
-        final String DELETE_ORGANIZATION_SUPERHERO_BY_ID = "delete from organization_superhero where id=?";
+        final String DELETE_ORGANIZATION_SUPERHERO_BY_ID = "delete from organization_superhero where organization_id=?";
         jdbc.update(DELETE_ORGANIZATION_SUPERHERO_BY_ID, id);
         final String DELETE_ORGANIZATION_BY_ID = "delete from organization where id=?";
         jdbc.update(DELETE_ORGANIZATION_BY_ID, id);
@@ -66,14 +68,13 @@ public class OrganizationDaoDB implements OrganizationDao {
 
     @Override
     public void updateOrganization(Organization organization) {
-        final String UPDATE_ORGANIZATION = "update organization set name=?, description=?, contact=?"
-                + "where id=?";
+        final String UPDATE_ORGANIZATION = "update organization set name=?, description=?, contact=? where id=?";
         jdbc.update(UPDATE_ORGANIZATION,
                 organization.getName(),
                 organization.getDescription(),
-                organization.getContact());
+                organization.getContact(),
+                organization.getId());
     }
-
 
 
     public static final class OrganizationMapper implements RowMapper<Organization> {

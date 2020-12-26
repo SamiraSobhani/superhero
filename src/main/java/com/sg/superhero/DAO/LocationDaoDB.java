@@ -20,10 +20,10 @@ public class LocationDaoDB implements LocationDao {
 
 
     @Override
-    public Location getLocationById(int location_id) {
+    public Location getLocationById(int id) {
         try {
-            final String GET_LOCATION_BY_ID = "select * from location where location_id=?";
-            return jdbc.queryForObject(GET_LOCATION_BY_ID, new LocationMapper(), location_id);
+            final String GET_LOCATION_BY_ID = "select * from location where id=?";
+            return jdbc.queryForObject(GET_LOCATION_BY_ID, new LocationMapper(), id);
         } catch (DataAccessException ex) {
             return null;
         }
@@ -47,7 +47,7 @@ public class LocationDaoDB implements LocationDao {
                 location.getLatitude(),
                 location.getLongitude());
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
-        location.setLocation_id(newId);
+        location.setId(newId);
         return location;
     }
 
@@ -56,7 +56,7 @@ public class LocationDaoDB implements LocationDao {
     public void deleteLocationById(int id) {
         final String DELETE_LOCATION_SUPERHERO_BY_ID = "delete from location_superhero where location_id=?";
         jdbc.update(DELETE_LOCATION_SUPERHERO_BY_ID, id);
-        final String DELETE_LOCATION_BY_ID = "delete from location where location_id=?";
+        final String DELETE_LOCATION_BY_ID = "delete from location where id=?";
         jdbc.update(DELETE_LOCATION_BY_ID, id);
 
     }
@@ -64,13 +64,14 @@ public class LocationDaoDB implements LocationDao {
     @Override
     public void updateLocation(Location location) {
         final String UPDATE_LOCATION = "update location set name=?, description=?,"
-                + "address=?, latitude=?, longitude=? where location_id=?";
+                + "address=?, latitude=?, longitude=? where id=?";
         jdbc.update(UPDATE_LOCATION,
                 location.getName(),
                 location.getDescription(),
                 location.getAddress(),
                 location.getLatitude(),
-                location.getLongitude());
+                location.getLongitude(),
+                location.getId());
     }
 
 
@@ -79,7 +80,7 @@ public class LocationDaoDB implements LocationDao {
         @Override
         public Location mapRow(ResultSet rs, int index) throws SQLException {
             Location location = new Location();
-            location.setLocation_id(rs.getInt("id"));
+            location.setId(rs.getInt("id"));
             location.setName(rs.getString("name"));
             location.setDescription(rs.getString("description"));
             location.setAddress(rs.getString("address"));
