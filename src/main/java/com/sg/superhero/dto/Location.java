@@ -1,15 +1,20 @@
-package com.sg.superhero.DTO;
+package com.sg.superhero.dto;
 
 
 import java.util.Objects;
 
 public class Location {
     private int id;
+
     private String name;
+
     private String description;
     private String address;
     private double latitude;
     private double longitude;
+
+    public Location() {
+    }
 
     public int getId() {
         return id;
@@ -75,5 +80,17 @@ public class Location {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getName(), getDescription(), getAddress(), getLatitude(), getLongitude());
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", address='" + address + '\'' +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
     }
 }

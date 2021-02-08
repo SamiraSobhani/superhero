@@ -1,7 +1,7 @@
 package com.sg.superhero;
 
-import com.sg.superhero.DAO.*;
-import com.sg.superhero.DTO.*;
+import com.sg.superhero.dao.*;
+import com.sg.superhero.dto.*;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +55,11 @@ public class OrganizationDaoDBTest {
         }
         List<Sighting> sightings = sightingDao.getAllSightings();
         for (Sighting sighting : sightings) {
-            sightingDao.deleteSightingByDate(sighting.getDate());
+            sightingDao.deleteSightingByLocationSuperheroDate(sighting.getLocation_id(),sighting.getSuperhero_id(),sighting.getDate());
+        }
+        List<Superpower> superpowers = superpowerDao.getAllSuperpowers();
+        for (Superpower superpower : superpowers) {
+            superpowerDao.deleteSuperpowerById(superpower.getId());
         }
     }
 
@@ -136,8 +140,8 @@ public class OrganizationDaoDBTest {
         Superhero superhero = new Superhero();
         superhero.setName("test name");
         superhero.setDescription("ddddd");
-        superhero.setSuperpowers(superpowers);
-        superhero.setOrganizations(organizations);
+        superhero.setSuperpower(superpowers);
+        superhero.setOrganization(organizations);
         superhero = superheroDao.addSuperhero(superhero);
 
         Organization fromDao = organizationDao.getOrganizationById(organization.getId());

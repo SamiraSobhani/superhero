@@ -1,6 +1,6 @@
-package com.sg.superhero.DAO;
+package com.sg.superhero.dao;
 
-import com.sg.superhero.DTO.Location;
+import com.sg.superhero.dto.Location;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -28,6 +28,16 @@ public class LocationDaoDB implements LocationDao {
             return null;
         }
     }
+
+    @Override
+    public int getLocationByName(String name) {
+
+        final String SELECT_LOCATION_BY_NAME = "select * from location where name=?";
+        int location_id=jdbc.queryForObject(SELECT_LOCATION_BY_NAME,
+                new LocationMapper(), name).getId();
+        return location_id;
+    }
+
 
     @Override
     public List<Location> getAllLocation() {
@@ -60,6 +70,7 @@ public class LocationDaoDB implements LocationDao {
         jdbc.update(DELETE_LOCATION_BY_ID, id);
 
     }
+
 
     @Override
     public void updateLocation(Location location) {

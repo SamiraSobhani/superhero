@@ -1,11 +1,12 @@
-package com.sg.superhero.DAO;
+package com.sg.superhero.dao;
 
-import com.sg.superhero.DTO.Sighting;
+import com.sg.superhero.dto.Sighting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,19 +21,19 @@ public class SightingDaoDB implements SightingDao {
 
     @Override
     public Sighting addSighting(Sighting sighting) {
-        final String ADD_SIGHTING = "INSERT into location_superhero (superhero_id, location_id, date) values(?,?,?)";
+        final String ADD_SIGHTING = "INSERT into location_superhero (location_id,superhero_id, date) values(?,?,?)";
         jdbc.update(ADD_SIGHTING,
-                sighting.getSuperhero_id(),
                 sighting.getLocation_id(),
+                sighting.getSuperhero_id(),
                 sighting.getDate());
         return sighting;
     }
 
     @Override
-    public Sighting getSightingByDate(Date date) {
+    public Sighting getSightingByLocationSuperheroDate(int location_id,int superhero_id,Date date) {
         try {
-            final String GET_SIGHTING_BY_DATE = "SELECT * FROM location_superhero where date=? ";
-            return jdbc.queryForObject(GET_SIGHTING_BY_DATE, new SightingMapper(), date);
+            final String GET_SIGHTING_BY_LOCATION_SUPERHERO_DATE = "SELECT * FROM location_superhero where location_id=? and superhero_id=? and date=? ";
+            return jdbc.queryForObject(GET_SIGHTING_BY_LOCATION_SUPERHERO_DATE, new SightingMapper(),location_id,superhero_id, date);
 
         } catch (DataAccessException ex) {
             return null;
@@ -46,14 +47,15 @@ public class SightingDaoDB implements SightingDao {
     }
 
     @Override
-    public void deleteSightingByDate(Date date) {
-        final String DELETE_SIGHTING_BY_DATE = "DELETE FROM location_superhero where date=?";
-        jdbc.update(DELETE_SIGHTING_BY_DATE, date);
+    @Transactional
+    public void deleteSightingByLocationSuperheroDate(int location_id,int superhero_id,Date date) {
+        final String DELETE_SIGHTING_BY_LOCATION_SUPERHERO_DATE = "DELETE FROM location_superhero where location_id=? and superhero_id=? and date=?";
+        jdbc.update(DELETE_SIGHTING_BY_LOCATION_SUPERHERO_DATE,location_id,superhero_id,date);
     }
 
     @Override
     public void updateSighting(Sighting sighting) {
-        final String UPDATE_SIGHTING = "UPDATE LOCATION_SUPERHERO SET location_id=?, superhero_id=?,date=?";
+        final String UPDATE_SIGHTING = "UPDATE LOCATION_SUPERHERO SET location_id=?, superhero_id=? where date=?";
         jdbc.update(UPDATE_SIGHTING,
                 sighting.getLocation_id(),
                 sighting.getSuperhero_id(),
@@ -66,9 +68,9 @@ public class SightingDaoDB implements SightingDao {
         @Override
         public Sighting mapRow(ResultSet rs, int index) throws SQLException {
             Sighting sighting = new Sighting();
+            sighting.setLocation_id(Integer.parseInt(rs.getString("location_id")));
+            sighting.setSuperhero_id(Integer.parseInt(rs.getString("superhero_id")));
             sighting.setDate(rs.getDate("date"));
-            sighting.setSuperhero_id(rs.getInt("superhero_id"));
-            sighting.setLocation_id(rs.getInt("location_id"));
             return sighting;
         }
     }

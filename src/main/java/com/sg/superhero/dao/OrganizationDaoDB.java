@@ -1,7 +1,7 @@
-package com.sg.superhero.DAO;
+package com.sg.superhero.dao;
 
-import com.sg.superhero.DTO.Organization;
-import com.sg.superhero.DTO.Superhero;
+import com.sg.superhero.dto.Organization;
+import com.sg.superhero.dto.Superhero;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -28,6 +28,11 @@ public class OrganizationDaoDB implements OrganizationDao {
             return null;
         }
     }
+    @Override
+    public Organization getOrganizationByName(String name){
+        final String GET_ORGANIZATION_BY_NAME="select * from organization where name=?";
+        return jdbc.queryForObject(GET_ORGANIZATION_BY_NAME, new OrganizationMapper(), name);
+    }
 
     @Override
     public List<Organization> getAllOrganization() {
@@ -41,14 +46,13 @@ public class OrganizationDaoDB implements OrganizationDao {
     public Organization addOrganization(Organization organization) {
         final String INSERT_ORGANIZATION = "INSERT INTO organization (name, description, contact)"
                 + "VALUES(?,?,?)";
-        jdbc.update(INSERT_ORGANIZATION,
+        int update = jdbc.update(INSERT_ORGANIZATION,
                 organization.getName(),
                 organization.getDescription(),
                 organization.getContact());
-        int id = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+               int id = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         organization.setId(id);
-        getMembersForOrganization(organization.getId());
-        return organization;
+             return organization;
     }
 
     private List<Superhero> getMembersForOrganization(int id) {
@@ -61,7 +65,7 @@ public class OrganizationDaoDB implements OrganizationDao {
     @Transactional
     public void deleteOrganizationById(int id) {
         final String DELETE_ORGANIZATION_SUPERHERO_BY_ID = "delete from organization_superhero where organization_id=?";
-        jdbc.update(DELETE_ORGANIZATION_SUPERHERO_BY_ID, id);
+        jdbc.update(DELETE_ORGANIZATION_SUPERHERO_BY_ID,id);
         final String DELETE_ORGANIZATION_BY_ID = "delete from organization where id=?";
         jdbc.update(DELETE_ORGANIZATION_BY_ID, id);
     }

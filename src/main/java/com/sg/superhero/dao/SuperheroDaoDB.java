@@ -1,12 +1,16 @@
-package com.sg.superhero.DAO;
+package com.sg.superhero.dao;
 
-import com.sg.superhero.DTO.*;
+import com.sg.superhero.dto.Location;
+import com.sg.superhero.dto.Organization;
+import com.sg.superhero.dto.Superhero;
+import com.sg.superhero.dto.Superpower;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,8 +28,8 @@ public class SuperheroDaoDB implements SuperheroDao {
         try {
             final String SELECT_SUPERHERO_BY_ID = "select * from superhero where id=?";
             Superhero superhero = jdbc.queryForObject(SELECT_SUPERHERO_BY_ID, new SuperheroMapper(), id);
-            superhero.setOrganizations(getOrganizationsForSuperhero(id));
-            superhero.setSuperpowers(getSuperpowerForSuperhero(id));
+            superhero.setOrganization(getOrganizationsForSuperhero(id));
+            superhero.setSuperpower(getSuperpowerForSuperhero(id));
             return superhero;
         } catch (DataAccessException ex) {
             return null;
@@ -33,11 +37,20 @@ public class SuperheroDaoDB implements SuperheroDao {
     }
 
     @Override
+    public int getSuperheroByName(String name) {
+        final String SELECT_SUPERHERO_BY_NAME = "select * from superhero where name=?";
+        int superhero_id = jdbc.queryForObject(SELECT_SUPERHERO_BY_NAME,
+                new SuperheroMapper(), name).getId();
+        return superhero_id;
+    }
+
+    @Override
     public List<Superpower> getSuperpowerForSuperhero(int superhero_id) {
         final String GET_SUPERPOWER_FOR_SUPERHERO = "SELECT s.* from superpower s"
                 + " join superpower_superhero ss ON ss.superpower_id=s.id " +
                 "where ss.superhero_id=?";
-        return jdbc.query(GET_SUPERPOWER_FOR_SUPERHERO, new SuperpowerDaoDB.SuperpowerMapper(), superhero_id);
+        List<Superpower> superpowers = jdbc.query(GET_SUPERPOWER_FOR_SUPERHERO, new SuperpowerDaoDB.SuperpowerMapper(), superhero_id);
+        return superpowers;
     }
 
     @Override
@@ -45,7 +58,8 @@ public class SuperheroDaoDB implements SuperheroDao {
         final String GET_ORGANIZATIONS_FOR_SUPERHERO = "SELECT o.* from organization o"
                 + " join organization_superhero os ON os.organization_id=o.id " +
                 "where os.superhero_id=?";
-        return jdbc.query(GET_ORGANIZATIONS_FOR_SUPERHERO, new OrganizationDaoDB.OrganizationMapper(), superhero_id);
+        List<Organization> organizations = jdbc.query(GET_ORGANIZATIONS_FOR_SUPERHERO, new OrganizationDaoDB.OrganizationMapper(), superhero_id);
+        return organizations;
     }
 
     @Override
@@ -58,8 +72,8 @@ public class SuperheroDaoDB implements SuperheroDao {
 
     private void associateOrganizationAndSuperpower(List<Superhero> superheroes) {
         for (Superhero superhero : superheroes) {
-            superhero.setOrganizations(getOrganizationsForSuperhero(superhero.getId()));
-            superhero.setSuperpowers(getSuperpowerForSuperhero(superhero.getId()));
+            superhero.setOrganization(getOrganizationsForSuperhero(superhero.getId()));
+            superhero.setSuperpower(getSuperpowerForSuperhero(superhero.getId()));
         }
     }
 
@@ -72,28 +86,30 @@ public class SuperheroDaoDB implements SuperheroDao {
                 superhero.getDescription());
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         superhero.setId(newId);
-        insertSuperpowerSuperhero(superhero);
         insertOrganizationSuperhero(superhero);
+        insertSuperpowerSuperhero(superhero);
         return superhero;
     }
 
     private void insertSuperpowerSuperhero(Superhero superhero) {
         final String INSERT_SUPERPOWER_SUPERHERO = "INSERT INTO " +
                 "SUPERPOWER_SUPERHERO (superpower_id,superhero_id) values(?,?)";
-        for (Superpower superpower : superhero.getSuperpowers()) {
+        for(Superpower superpower : superhero.getSuperpower()) {
             jdbc.update(INSERT_SUPERPOWER_SUPERHERO,
                     superpower.getId(),
                     superhero.getId());
+
         }
     }
 
     private void insertOrganizationSuperhero(Superhero superhero) {
         final String INSERT_ORGANIZATION_SUPERHERO = "INSERT INTO " +
-                "ORGANIZATION_SUPERHERO (superhero_id,organization_id) VALUES(?,?)";
-        for (Organization organization : superhero.getOrganizations()) {
+                "ORGANIZATION_SUPERHERO (organization_id,superhero_id) VALUES(?,?)";
+        for (Organization organization : superhero.getOrganization()) {
             jdbc.update(INSERT_ORGANIZATION_SUPERHERO,
-                    superhero.getId(),
-                    organization.getId());
+                    organization.getId(),
+                    superhero.getId());
+
         }
     }
 
@@ -102,7 +118,7 @@ public class SuperheroDaoDB implements SuperheroDao {
     public void deleteSuperheroById(int id) {
         final String DELETE_ORGANIZATION_SUPERHERO = "DELETE FROM ORGANIZATION_SUPERHERO WHERE superhero_id=?";
         jdbc.update(DELETE_ORGANIZATION_SUPERHERO, id);
-        final String DELETE_LOCATION_SUPERHERO = "DELETE FROM LOCATION_SUPERHERO WHERE superhero_id=?";
+        final String DELETE_LOCATION_SUPERHERO = "DELETE FROM LOCATION_SUPERHERO WHERE superhero_id=? ";
         jdbc.update(DELETE_LOCATION_SUPERHERO, id);
         final String DELETE_SUPERPOWER_SUPERHERO = "DELETE FROM SUPERPOWER_SUPERHERO WHERE superhero_id=?";
         jdbc.update(DELETE_SUPERPOWER_SUPERHERO, id);
@@ -118,25 +134,24 @@ public class SuperheroDaoDB implements SuperheroDao {
                 superhero.getName(),
                 superhero.getDescription(),
                 superhero.getId());
-
         final String DELETE_ORGANIZATION_SUPERHERO = "DELETE FROM ORGANIZATION_SUPERHERO WHERE superhero_id=?";
         jdbc.update(DELETE_ORGANIZATION_SUPERHERO, superhero.getId());
         insertOrganizationSuperhero(superhero);
     }
 
     @Override
-    public List<Superhero> getSuperherosForLocation(Location location) {
+    public List<Superhero> getSuperherosForLocation(int location_id) {
         final String GET_SUPERHERO_FOR_LOCATION = "SELECT s.* FROM superhero s JOIN location_superhero ls " +
                 "ON ls.superhero_id=s.id where ls.location_id =?";
-        List<Superhero> superheroes = jdbc.query(GET_SUPERHERO_FOR_LOCATION, new SuperheroMapper(), location.getId());
+        List<Superhero> superheroes = jdbc.query(GET_SUPERHERO_FOR_LOCATION, new SuperheroMapper(), location_id);
         return superheroes;
     }
 
     @Override
-    public List<Superhero> getMemberForOrganization(Organization organization) {
+    public List<Superhero> getMemberForOrganization(int organization_id) {
         final String GET_MEMBER_FOR_ORGANIZATION = "select s.* from superhero s " +
                 "join organization_superhero os on os.superhero_id=s.id where os.organization_id=?";
-        List<Superhero> superheroes = jdbc.query(GET_MEMBER_FOR_ORGANIZATION, new SuperheroMapper(), organization.getId());
+        List<Superhero> superheroes = jdbc.query(GET_MEMBER_FOR_ORGANIZATION, new SuperheroMapper(), organization_id);
         return superheroes;
     }
 
@@ -146,9 +161,10 @@ public class SuperheroDaoDB implements SuperheroDao {
 
         final String GET_LOCATIONANDSUPERHERO_FOR_DATE = "select s.* from superhero s" +
                 " join location_superhero ls on s.id=ls.superhero_id where date=? && location_id=?";
-        List<Superhero> superheroes = jdbc.query(GET_LOCATIONANDSUPERHERO_FOR_DATE, new SuperheroMapper(), date);
+        List<Superhero> superheroes = jdbc.query(GET_LOCATIONANDSUPERHERO_FOR_DATE, new SuperheroMapper(), date,location_id);
         return superheroes;
     }
+
 
 
     @Override
@@ -156,15 +172,15 @@ public class SuperheroDaoDB implements SuperheroDao {
         final String GET_LOCATION_FOR_SUPERHERO = "select l.* from location l " +
                 "JOIN location_superhero ls on ls.location_id=l.id " +
                 "where ls.superhero_id=?";
-
         return jdbc.query(GET_LOCATION_FOR_SUPERHERO, new LocationDaoDB.LocationMapper(), superhero_id);
     }
 
+    @Override
+    public void saveImage(MultipartFile imageFile) {
 
+    }
 
     public static final class SuperheroMapper implements RowMapper<Superhero> {
-
-
         @Override
         public Superhero mapRow(ResultSet rs, int index) throws SQLException {
             Superhero superhero = new Superhero();

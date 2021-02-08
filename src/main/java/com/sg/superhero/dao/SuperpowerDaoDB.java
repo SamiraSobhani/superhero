@@ -1,8 +1,8 @@
-package com.sg.superhero.DAO;
+package com.sg.superhero.dao;
 
 
-import com.sg.superhero.DTO.Superhero;
-import com.sg.superhero.DTO.Superpower;
+import com.sg.superhero.dto.Superhero;
+import com.sg.superhero.dto.Superpower;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -28,13 +28,13 @@ public class SuperpowerDaoDB implements SuperpowerDao {
                 superpower.getName());
         int id = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         superpower.setId(id);
-        getSuperherosForSuperpower(superpower.getId());
+       //getSuperherosForSuperpower(superpower.getId());
         return superpower;
     }
 
     private List<Superhero> getSuperherosForSuperpower(int id) {
-        final String GET_SUPERHEROS_FOR_SUPERPOWER = "SELECT S.* FROM SUPERHERO S " +
-                "JOIN SUPERPOWER_SUPERHERO SS ON SS.SUPERHERO_ID=S.ID WHERE ID=? ";
+        final String GET_SUPERHEROS_FOR_SUPERPOWER = "SELECT s.* FROM SUPERHERO S " +
+                "JOIN SUPERPOWER_SUPERHERO SS ON SS.SUPERHERO_ID=S.ID WHERE superpower_id=? ";
         return jdbc.query(GET_SUPERHEROS_FOR_SUPERPOWER, new SuperheroDaoDB.SuperheroMapper(), id);
     }
 
@@ -46,6 +46,13 @@ public class SuperpowerDaoDB implements SuperpowerDao {
         } catch (DataAccessException ex) {
             return null;
         }
+    }
+
+
+    @Override
+    public Superpower getSuperpowerByName(String name){
+        final String GET_SUPERPOWER_BY_NAME="select * from superpower where name=?";
+        return jdbc.queryForObject(GET_SUPERPOWER_BY_NAME, new SuperpowerMapper(), name);
     }
 
     @Override

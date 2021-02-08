@@ -1,4 +1,4 @@
-package com.sg.superhero.DTO;
+package com.sg.superhero.dto;
 
 import java.util.Objects;
 
@@ -8,6 +8,8 @@ public class Organization {
     private String description;
     private String contact;
 
+    public Organization() {
+    }
 
     public int getId() {
         return id;
@@ -55,5 +57,15 @@ public class Organization {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getName(), getDescription(), getContact());
+    }
+
+    @Override
+    public String toString() {
+        return "Organization{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", contact='" + contact + '\'' +
+                '}';
     }
 }

@@ -1,4 +1,4 @@
-package com.sg.superhero.DTO;
+package com.sg.superhero.dto;
 
 import java.util.Objects;
 
@@ -34,5 +34,13 @@ public class Superpower {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getName());
+    }
+
+    @Override
+    public String toString() {
+        return "Superpower{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

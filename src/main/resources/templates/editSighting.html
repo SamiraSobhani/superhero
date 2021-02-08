@@ -8,20 +8,19 @@
     <!-- Bootstrap CSS -->
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" rel="stylesheet">
-
-    <title>superhero main page</title>
+    <title>editSighting</title>
 </head>
 <body>
 
 <div class="container">
     <div class="row m-4">
         <div class="col text-center border border-dark">
-            <h1>Superhero Manager</h1>
+            <h1><a href="index.html">Superhero Manager</a></h1>
         </div>
     </div>
     <div class="row m-4 border border-dark">
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="superhero.html">Superhero</a>
+            <a class="btn btn-outline-primary btn-lg" href="superhero">Superhero</a>
         </div>
         <div class="col text-center m-2">
             <a class="btn btn-outline-primary btn-lg" href="location.html">Location</a>
@@ -36,29 +35,45 @@
             <a class="btn btn-outline-primary btn-lg" href="sighting.html">Sighting</a>
         </div>
     </div>
+</div>
+<div class="row m-4 border border-dark">
+    <div class="col-3 text-center m-3">
+        <span class="h3">Edit Sighting</span>
+    </div>
+    <div class="col-7 text-center m-3">
+        <form  method="POST">
+            <div class="form-group row">
+                <label class="col-3 col-form-label" for="new_location_name">
+                    Location Name</label>
+                <div class="col-9">
+                    <input class="form-control" id="new_location_name" name="new_location_name"
+                           th:value="${test.lName}" type="text"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-form-label" for="new_superhero_name">
+                    Superhero Name</label>
+                <div class="col-9">
+                    <input class="form-control" id="new_superhero_name" name="new_superhero_name"
+                           th:value="${test.sName}" type="text"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-form-label" for="new_date">
+                    Date</label>
+                <div class="col-9">
+                    <input class="form-control" id="new_date" name="new_date"
+                           th:value="${test.sDate}" type="text">
+                </div>
+            </div>
 
-
-    <div class="row m-4 border border-dark">
-        <div class="col text-center m-3">
-            <table  class="table table-striped">
-                <thead>
-                <tr>
-                    <th>SuperheroName</th>
-                    <th>LocationName</th>
-                    <th>Date</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="sighting : ${sightings}">
-                    <td th:text="${sighting.superhero_id}">Superhero Name</td>
-                    <td th:text="${sighting.location_id}">Location Name</td>
-                    <td th:text="${sighting.date}">Date</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+            <button class="btn btn-primary" type="submit">
+                Update Sighting
+            </button>
+        </form>
     </div>
 </div>
+
 
 <script crossorigin="anonymous"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

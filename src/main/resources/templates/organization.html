@@ -12,6 +12,7 @@
     <title>organizations</title>
 </head>
 <body>
+
 <div class="container">
     <div class="row m-4">
         <div class="col text-center border border-dark">
@@ -20,19 +21,19 @@
     </div>
     <div class="row m-4 border border-dark">
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="superheros.html">Superhero</a>
+            <a class="btn btn-outline-primary btn-lg" href="superhero.html">Superhero</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="locations.html">Location</a>
+            <a class="btn btn-outline-primary btn-lg" href="location.html">Location</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="organizations.html">Organization</a>
+            <a class="btn btn-outline-primary btn-lg" href="organization.html">Organization</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="superpowers.html">Superpower</a>
+            <a class="btn btn-outline-primary btn-lg" href="superpower.html">Superpower</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="sightings.html">Sightings</a>
+            <a class="btn btn-outline-primary btn-lg" href="sighting.html">Sightings</a>
         </div>
     </div>
 </div>
@@ -42,7 +43,7 @@
         <span class="h3">Add Organization</span>
     </div>
     <div class="col-7 text-center m-3">
-        <form method="POST">
+        <form action="addOrganization" method="POST">
             <div class="form-group row">
                 <label class="col-3 col-form-label" for="name">
                     Name</label>
@@ -67,7 +68,7 @@
                            name="contact" type="text"/>
                 </div>
             </div>
-            <button class="btn btn-primary" onclick="addOrganization()" type="submit">Add Organization</button>
+            <button class="btn btn-primary" type="submit">Add Organization</button>
         </form>
     </div>
 </div>
@@ -87,7 +88,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr th:each="organization : ${organizations}">
                 <td th:text="${organization.id}">Organization ID</td>
                 <td th:text="${organization.name}">organization Name</td>
                 <td th:text="${organization.description}">organization Description</td>
@@ -100,6 +101,7 @@
     </div>
 </div>
 </div>
+
 <script crossorigin="anonymous"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

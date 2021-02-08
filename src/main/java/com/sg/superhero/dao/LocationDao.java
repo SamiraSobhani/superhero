@@ -1,11 +1,14 @@
-package com.sg.superhero.DAO;
+package com.sg.superhero.dao;
 
-import com.sg.superhero.DTO.Location;
+import com.sg.superhero.dto.Location;
 
 import java.util.List;
 
 public interface LocationDao {
+
     Location getLocationById(int id);
+
+    int getLocationByName(String name);
 
     List<Location> getAllLocation();
 

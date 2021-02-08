@@ -1,7 +1,7 @@
 package com.sg.superhero;
 
-import com.sg.superhero.DAO.*;
-import com.sg.superhero.DTO.*;
+import com.sg.superhero.dao.*;
+import com.sg.superhero.dto.*;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class SuperpowerDaoDBTest {
     }
 
     @Before
-    public void setUp() {
+    public void setup() {
         List<Location> locations = locationDao.getAllLocation();
         for (Location location : locations) {
             locationDao.deleteLocationById(location.getId());
@@ -52,13 +52,13 @@ public class SuperpowerDaoDBTest {
         for (Organization organization : organizations) {
             organizationDao.deleteOrganizationById(organization.getId());
         }
+        List<Sighting> sightings = sightingDao.getAllSightings();
+        for (Sighting sighting : sightings) {
+            sightingDao.deleteSightingByLocationSuperheroDate(sighting.getLocation_id(),sighting.getSuperhero_id(),sighting.getDate());;
+        }
         List<Superpower> superpowers = superpowerDao.getAllSuperpowers();
         for (Superpower superpower : superpowers) {
             superpowerDao.deleteSuperpowerById(superpower.getId());
-        }
-        List<Sighting> sightings = sightingDao.getAllSightings();
-        for (Sighting sighting : sightings) {
-            sightingDao.deleteSightingByDate(sighting.getDate());
         }
     }
 
@@ -84,7 +84,7 @@ public class SuperpowerDaoDBTest {
         superpower = superpowerDao.addSuperpower(superpower);
 
         Superpower superpower2 = new Superpower();
-        superpower2.setName("test sup pow name");
+        superpower2.setName("test sup pow name2");
         superpower2 = superpowerDao.addSuperpower(superpower2);
 
         List<Superpower> superpowers = superpowerDao.getAllSuperpowers();
@@ -130,8 +130,8 @@ public class SuperpowerDaoDBTest {
         Superhero superhero = new Superhero();
         superhero.setName("test name");
         superhero.setDescription("ddddd");
-        superhero.setSuperpowers(superpowers);
-        superhero.setOrganizations(organizations);
+        superhero.setSuperpower(superpowers);
+        superhero.setOrganization(organizations);
         superhero = superheroDao.addSuperhero(superhero);
 
         Superpower fromDao = superpowerDao.getSuperpowerById(superpower.getId());

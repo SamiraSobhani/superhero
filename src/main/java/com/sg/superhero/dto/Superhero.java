@@ -1,4 +1,4 @@
-package com.sg.superhero.DTO;
+package com.sg.superhero.dto;
 
 import java.util.List;
 import java.util.Objects;
@@ -8,9 +8,12 @@ public class Superhero {
     private int id;
     private String name;
     private String description;
-    private List<Superpower> superpowers;
-    private List<Organization> organizations;
+    private List<Superpower> superpower;
+    private List<Organization> organization;
+    private String photo;
 
+    public Superhero() {
+    }
 
     public int getId() {
         return id;
@@ -36,20 +39,20 @@ public class Superhero {
         this.description = description;
     }
 
-    public List<Superpower> getSuperpowers() {
-        return superpowers;
+    public List<Superpower> getSuperpower() {
+        return superpower;
     }
 
-    public void setSuperpowers(List<Superpower> superpowers) {
-        this.superpowers = superpowers;
+    public void setSuperpower(List<Superpower> superpower) {
+        this.superpower = superpower;
     }
 
-    public List<Organization> getOrganizations() {
-        return organizations;
+    public List<Organization> getOrganization() {
+        return organization;
     }
 
-    public void setOrganizations(List<Organization> organizations) {
-        this.organizations = organizations;
+    public void setOrganization(List<Organization> organization) {
+        this.organization = organization;
     }
 
     @Override
@@ -60,13 +63,13 @@ public class Superhero {
         return getId() == superhero.getId() &&
                 getName().equals(superhero.getName()) &&
                 Objects.equals(getDescription(), superhero.getDescription()) &&
-                getSuperpowers().equals(superhero.getSuperpowers()) &&
-                getOrganizations().equals(superhero.getOrganizations());
+                getSuperpower().equals(superhero.getSuperpower()) &&
+                getOrganization().equals(superhero.getOrganization());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getDescription(), getSuperpowers(), getOrganizations());
+        return Objects.hash(getId(), getName(), getDescription(), getSuperpower(), getOrganization());
     }
 
     @Override
@@ -75,8 +78,8 @@ public class Superhero {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", superpowers=" + superpowers +
-                ", organizations=" + organizations +
+                ", superpower=" + superpower +
+                ", organization=" + organization +
                 '}';
     }
 }

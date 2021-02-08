@@ -1,7 +1,7 @@
 package com.sg.superhero;
 
-import com.sg.superhero.DAO.*;
-import com.sg.superhero.DTO.*;
+import com.sg.superhero.dao.*;
+import com.sg.superhero.dto.*;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +55,11 @@ public class LocationDaoDBTest {
         }
         List<Sighting> sightings = sightingDao.getAllSightings();
         for (Sighting sighting : sightings) {
-            sightingDao.deleteSightingByDate(sighting.getDate());
+            sightingDao.deleteSightingByLocationSuperheroDate(sighting.getLocation_id(),sighting.getSuperhero_id(),sighting.getDate());
+        }
+        List<Superpower> superpowers = superpowerDao.getAllSuperpowers();
+        for (Superpower superpower : superpowers) {
+            superpowerDao.deleteSuperpowerById(superpower.getId());
         }
     }
 
@@ -126,6 +130,14 @@ public class LocationDaoDBTest {
     @Test
     public void testDeleteLocationById() {
 
+        Location location = new Location();
+        location.setName("Test Name");
+        location.setDescription("Test Description");
+        location.setAddress("Test Address");
+        location.setLatitude(15.123);
+        location.setLongitude(45.1234);
+        location = locationDao.addLocation(location);
+
         Organization organization = new Organization();
         organization.setName("Test org Name");
         organization.setDescription("Test org Desc");
@@ -134,13 +146,6 @@ public class LocationDaoDBTest {
         List<Organization> organizations = new ArrayList<>();
         organizations.add(organization);
 
-        Location location = new Location();
-        location.setName("Test Name");
-        location.setDescription("Test Description");
-        location.setAddress("Test Address");
-        location.setLatitude(15.123);
-        location.setLongitude(45.1234);
-        location = locationDao.addLocation(location);
 
         Superpower superpower = new Superpower();
         superpower.setName("test sup pow name");
@@ -152,8 +157,8 @@ public class LocationDaoDBTest {
         Superhero superhero = new Superhero();
         superhero.setName("Test superhero Name");
         superhero.setDescription("Test superhero desc");
-        superhero.setSuperpowers(superpowers);
-        superhero.setOrganizations(organizations);
+        superhero.setSuperpower(superpowers);
+        superhero.setOrganization(organizations);
         superhero = superheroDao.addSuperhero(superhero);
 
         Location fromDao = locationDao.getLocationById(location.getId());

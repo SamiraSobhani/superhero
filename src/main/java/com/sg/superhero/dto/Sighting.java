@@ -1,4 +1,6 @@
-package com.sg.superhero.DTO;
+package com.sg.superhero.dto;
+
+
 
 import java.sql.Date;
 import java.util.Objects;
@@ -10,14 +12,12 @@ public class Sighting {
     int location_id;
     int superhero_id;
 
-
-
-    public int getSuperhero_id() {
-        return superhero_id;
+    public Date getDate() {
+        return date;
     }
 
-    public void setSuperhero_id(int superhero_id) {
-        this.superhero_id = superhero_id;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public int getLocation_id() {
@@ -28,12 +28,15 @@ public class Sighting {
         this.location_id = location_id;
     }
 
-    public Date getDate() {
-        return date;
+    public int getSuperhero_id() {
+        return superhero_id;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setSuperhero_id(int superhero_id) {
+        this.superhero_id = superhero_id;
+    }
+
+    public Sighting() {
     }
 
     @Override

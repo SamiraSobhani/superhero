@@ -1,7 +1,7 @@
 package com.sg.superhero;
 
-import com.sg.superhero.DAO.*;
-import com.sg.superhero.DTO.*;
+import com.sg.superhero.dao.*;
+import com.sg.superhero.dto.*;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +56,7 @@ public class SightingDaoDBTest {
         }
         List<Sighting> sightings = sightingDao.getAllSightings();
         for (Sighting sighting : sightings) {
-            sightingDao.deleteSightingByDate(sighting.getDate());
+            sightingDao.deleteSightingByLocationSuperheroDate(sighting.getLocation_id(),sighting.getSuperhero_id(),sighting.getDate());
         }
         List<Superpower> superpowers = superpowerDao.getAllSuperpowers();
         for (Superpower superpower : superpowers) {
@@ -85,14 +85,14 @@ public class SightingDaoDBTest {
         superpowers.add(superpower);
 
         Superhero superhero = new Superhero();
-        superhero.setName("test name");
+        superhero.setName("test name su");
         superhero.setDescription("test desc");
-        superhero.setSuperpowers(superpowers);
-        superhero.setOrganizations(organizations);
+        superhero.setSuperpower(superpowers);
+        superhero.setOrganization(organizations);
         superhero = superheroDao.addSuperhero(superhero);
 
         Location location = new Location();
-        location.setName("Test Name");
+        location.setName("Test Name lo");
         location.setDescription("Test Description");
         location.setAddress("Test Address");
         location.setLatitude(15.123);
@@ -106,7 +106,7 @@ public class SightingDaoDBTest {
         sighting.setDate(newDate);
         sighting = sightingDao.addSighting(sighting);
 
-        Sighting fromDao = sightingDao.getSightingByDate(sighting.getDate());
+        Sighting fromDao = sightingDao.getSightingByLocationSuperheroDate(sighting.getLocation_id(),sighting.getSuperhero_id(),sighting.getDate());
         assertEquals(sighting, fromDao);
     }
 
@@ -127,14 +127,14 @@ public class SightingDaoDBTest {
         superpowers.add(superpower);
 
         Superhero superhero = new Superhero();
-        superhero.setName("test name");
+        superhero.setName("test name su");
         superhero.setDescription("test desc");
-        superhero.setSuperpowers(superpowers);
-        superhero.setOrganizations(organizations);
+        superhero.setSuperpower(superpowers);
+        superhero.setOrganization(organizations);
         superhero = superheroDao.addSuperhero(superhero);
 
         Location location = new Location();
-        location.setName("Test Name");
+        location.setName("Test Name lo");
         location.setDescription("Test Description");
         location.setAddress("Test Address");
         location.setLatitude(15.123);
@@ -179,14 +179,14 @@ public class SightingDaoDBTest {
         superpowers.add(superpower);
 
         Superhero superhero = new Superhero();
-        superhero.setName("test name");
+        superhero.setName("test name su");
         superhero.setDescription("test desc");
-        superhero.setSuperpowers(superpowers);
-        superhero.setOrganizations(organizations);
+        superhero.setSuperpower(superpowers);
+        superhero.setOrganization(organizations);
         superhero = superheroDao.addSuperhero(superhero);
 
         Location location = new Location();
-        location.setName("Test Name");
+        location.setName("Test Name lo");
         location.setDescription("Test Description");
         location.setAddress("Test Address");
         location.setLatitude(15.123);
@@ -199,7 +199,7 @@ public class SightingDaoDBTest {
         Date newDate = new java.sql.Date(2020, 12, 24);
         sighting.setDate(newDate);
         sighting = sightingDao.addSighting(sighting);
-        Sighting fromDao = sightingDao.getSightingByDate(sighting.getDate());
+        Sighting fromDao = sightingDao.getSightingByLocationSuperheroDate(sighting.getLocation_id(),sighting.getSuperhero_id(),sighting.getDate());
         assertEquals(sighting, fromDao);
 
 
@@ -209,8 +209,8 @@ public class SightingDaoDBTest {
         superpower2.setName("update super power name");
         superpower2 = superpowerDao.addSuperpower(superpower2);
         superpowers.add(superpower2);
-        superhero.setSuperpowers(superpowers);
-        superhero.setOrganizations(organizations);
+        superhero.setSuperpower(superpowers);
+        superhero.setOrganization(organizations);
 
 
         superhero = superheroDao.addSuperhero(superhero);
@@ -241,14 +241,14 @@ public class SightingDaoDBTest {
         superpowers.add(superpower);
 
         Superhero superhero = new Superhero();
-        superhero.setName("test name");
+        superhero.setName("test name su");
         superhero.setDescription("test desc");
-        superhero.setSuperpowers(superpowers);
-        superhero.setOrganizations(organizations);
+        superhero.setSuperpower(superpowers);
+        superhero.setOrganization(organizations);
         superhero = superheroDao.addSuperhero(superhero);
 
         Location location = new Location();
-        location.setName("Test Name");
+        location.setName("Test Name lo");
         location.setDescription("Test Description");
         location.setAddress("Test Address");
         location.setLatitude(15.123);
@@ -262,12 +262,12 @@ public class SightingDaoDBTest {
         sighting.setDate(newDate);
         sighting = sightingDao.addSighting(sighting);
 
-        Sighting fromDao = sightingDao.getSightingByDate(sighting.getDate());
+        Sighting fromDao = sightingDao.getSightingByLocationSuperheroDate(sighting.getLocation_id(),sighting.getSuperhero_id(),sighting.getDate());
         assertEquals(sighting, fromDao);
 
-        sightingDao.deleteSightingByDate(sighting.getDate());
+        sightingDao.deleteSightingByLocationSuperheroDate(sighting.getLocation_id(),sighting.getSuperhero_id(),sighting.getDate());
 
-        fromDao = sightingDao.getSightingByDate(sighting.getDate());
+        fromDao = sightingDao.getSightingByLocationSuperheroDate(sighting.getLocation_id(),sighting.getSuperhero_id(),sighting.getDate());
         assertNull(fromDao);
 
     }

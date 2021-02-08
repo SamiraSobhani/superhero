@@ -1,11 +1,14 @@
-package com.sg.superhero.DAO;
+package com.sg.superhero.dao;
 
-import com.sg.superhero.DTO.Organization;
+import com.sg.superhero.dto.Organization;
 
 import java.util.List;
 
 public interface OrganizationDao {
+
     Organization getOrganizationById(int id);
+
+    Organization getOrganizationByName(String name);
 
     List<Organization> getAllOrganization();
 
