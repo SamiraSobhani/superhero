@@ -10,29 +10,29 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" rel="stylesheet">
     <title>superhero</title>
 </head>
-<body>
+<body style="border-radius:10px;">
 
-<div class="container">
+<div class="container" style="border-radius:10px;">
     <div class="row m-4">
         <div class="col text-center border border-dark">
-            <h1 ><a href="index.html">Superhero Manager</a></h1>
+            <h1 ><a style="color: black" href="index.html">Superhero Manager</a></h1>
         </div>
     </div>
     <div class="row m-4 border border-dark">
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="superhero.html">Superhero</a>
+            <a class="btn btn-outline-primary btn-lg" href="superhero.html" style="color: black;border-color: darkred">Superhero</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="location.html">Location</a>
+            <a class="btn btn-outline-primary btn-lg" href="location.html" style="color: black;border-color: darkred">Location</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="organization.html">Organization</a>
+            <a class="btn btn-outline-primary btn-lg" href="organization.html" style="color: black;border-color: darkred">Organization</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="superpower.html">Superpower</a>
+            <a class="btn btn-outline-primary btn-lg" href="superpower.html" style="color: black;border-color: darkred">Superpower</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="sighting.html">Sighting</a>
+            <a class="btn btn-outline-primary btn-lg" href="sighting.html" style="color: black;border-color: darkred">Sighting</a>
         </div>
     </div>
 </div>
@@ -92,7 +92,7 @@
                 <input id="imageFile" name="imageFile" type="file">
             </div>
 
-            <button class="btn btn-primary" type="submit">Add Superhero</button>
+            <button class="btn btn-primary" type="submit" style="color: white ; background-color: darkred; border-style: none">Add Superhero</button>
         </form>
     </div>
 </div>
@@ -105,8 +105,7 @@
                 <th>Superhero ID</th>
                 <th>Superhero Name</th>
                 <th>Superhero Description</th>
-                <th>Edit</th>
-                <th>Delete</th>
+
             </tr>
             </thead>
             <tbody>
@@ -115,8 +114,8 @@
                 <td th:text="${superhero.name}">Superhero Name</td>
                 <td th:text="${superhero.description}">Superhero Description</td>
 
-                <td><a href="#" th:href="@{/editSuperhero.html(id=${superhero.id})}">Edit</a></td>
-                <td><a href="#" th:href="@{/deleteSuperhero(id=${superhero.id})}">Delete</a></td>
+                <td><a href="#" th:href="@{/editSuperhero.html(id=${superhero.id})}" style="color: darkred ">Edit</a></td>
+                <td><a href="#" th:href="@{/deleteSuperhero(id=${superhero.id})}" style="color: darkred ">Delete</a></td>
             </tr>
             </tbody>
         </table>
