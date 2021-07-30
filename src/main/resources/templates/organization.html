@@ -15,25 +15,25 @@
 
 <div class="container">
     <div class="row m-4">
-        <div class="col text-center border border-dark">
-            <h1 style="color: black"><a href="index.html">Superhero Manager</a></h1>
+        <div class="col text-center border border-dark" >
+            <h1 ><a href="index.html" style="color: black">Superhero Manager</a></h1>
         </div>
     </div>
-    <div class="row m-4 border border-dark">
-        <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="superhero.html">Superhero</a>
+    <div class="row m-4 border border-dark" >
+        <div class="col text-center m-2" >
+            <a class="btn btn-outline-primary btn-lg" href="superhero.html" style="color: black;border-color: darkred">Superhero</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="location.html">Location</a>
+            <a class="btn btn-outline-primary btn-lg" href="location.html"style="color: black;border-color: darkred">Location</a>
+        </div>
+        <div class="col text-center m-2" >
+            <a class="btn btn-outline-primary btn-lg" href="organization.html" style="color: black;border-color: darkred">Organization</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="organization.html">Organization</a>
+            <a class="btn btn-outline-primary btn-lg" href="superpower.html" style="color: black;border-color: darkred">Superpower</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="superpower.html">Superpower</a>
-        </div>
-        <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="sighting.html">Sightings</a>
+            <a class="btn btn-outline-primary btn-lg" href="sighting.html" style="color: black;border-color: darkred">Sightings</a>
         </div>
     </div>
 </div>
@@ -68,7 +68,7 @@
                            name="contact" type="text"/>
                 </div>
             </div>
-            <button class="btn btn-primary" type="submit">Add Organization</button>
+            <button class="btn btn-primary" type="submit" style="color: white ; background-color: darkred; border-style: none">Add Organization</button>
         </form>
     </div>
 </div>
@@ -83,8 +83,7 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Contact</th>
-                <th>Edit</th>
-                <th>Delete</th>
+
             </tr>
             </thead>
             <tbody>
@@ -93,8 +92,8 @@
                 <td th:text="${organization.name}">organization Name</td>
                 <td th:text="${organization.description}">organization Description</td>
                 <td th:text="${organization.contact}">organization Contact</td>
-                <td><a href="#" th:href="@{/editOrganization.html(id=${organization.id})}">Edit</a></td>
-                <td><a href="#" th:href="@{/deleteOrganization(id=${organization.id})}">Delete</a></td>
+                <td><a href="#" th:href="@{/editOrganization.html(id=${organization.id})}" style="color: darkred ">Edit</a></td>
+                <td><a href="#" th:href="@{/deleteOrganization(id=${organization.id})}" style="color: darkred ">Delete</a></td>
             </tr>
             </tbody>
         </table>

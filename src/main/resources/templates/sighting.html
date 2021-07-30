@@ -16,24 +16,24 @@
 <div class="container">
     <div class="row m-4">
         <div class="col text-center border border-dark">
-            <h1 style="color: black"><a href="index.html">Superhero Manager</a></h1>
+            <h1 ><a href="index.html" style="color: black">Superhero Manager</a></h1>
         </div>
     </div>
     <div class="row m-4 border border-dark">
         <div  class="col text-center m-2">
-            <a  class="btn btn-outline-primary btn-lg" href="superhero.html">Superhero</a>
+            <a  class="btn btn-outline-primary btn-lg" href="superhero.html" style="color: black;border-color: darkred">Superhero</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="location.html">Location</a>
+            <a class="btn btn-outline-primary btn-lg" href="location.html" style="color: black;border-color: darkred">Location</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="organization.html">Organization</a>
+            <a class="btn btn-outline-primary btn-lg" href="organization.html" style="color: black;border-color: darkred">Organization</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="superpower.html">Superpower</a>
+            <a class="btn btn-outline-primary btn-lg" href="superpower.html" style="color: black;border-color: darkred">Superpower</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="sighting.html">Sighting</a>
+            <a class="btn btn-outline-primary btn-lg" href="sighting.html" style="color: black;border-color: darkred">Sighting</a>
         </div>
     </div>
 </div>
@@ -84,7 +84,7 @@
                            name="date" type="text"/>
                 </div>
             </div>
-            <button class="btn btn-primary" type="submit">Add Sighting</button>
+            <button class="btn btn-primary" type="submit" style="color: white ; background-color: darkred; border-style: none">Add Sighting</button>
         </form>
     </div>
 </div>
@@ -106,8 +106,8 @@
                 <td th:text="${test.lName}">Location Name</td>
                 <td th:text="${test.sDate}">Date</td>
 
-                <td><a href="#" th:href="@{/editSighting.html(location_id= ${test.locationId}, superhero_id=${test.superheroId}, date=${test.sDate})}">Edit</a></td>
-                <td><a href="#" th:href="@{/deleteSighting(location_id=${test.locationId}, superhero_id=${test.superheroId}, date=${test.sDate})}">Delete</a></td>
+                <td><a href="#" th:href="@{/editSighting.html(location_id= ${test.locationId}, superhero_id=${test.superheroId}, date=${test.sDate})}" style="color: darkred ">Edit</a></td>
+                <td><a href="#" th:href="@{/deleteSighting(location_id=${test.locationId}, superhero_id=${test.superheroId}, date=${test.sDate})}" style="color: darkred ">Delete</a></td>
             </tr>
             </tbody>
         </table>
