@@ -16,24 +16,24 @@
 <div class="container">
     <div class="row m-4">
         <div class="col text-center border border-dark">
-            <h1 style="color: black"><a href="index.html">Superhero Manager</a></h1>
+            <h1 ><a href="index.html" style="color: black">Superhero Manager</a></h1>
         </div>
     </div>
     <div class="row m-4 border border-dark">
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="superhero.html">Superhero</a>
+            <a class="btn btn-outline-primary btn-lg" href="superhero.html" style="color: black;border-color: darkred">Superhero</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="location.html">Location</a>
+            <a class="btn btn-outline-primary btn-lg" href="location.html" style="color: black;border-color: darkred">Location</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="organization.html">Organization</a>
+            <a class="btn btn-outline-primary btn-lg" href="organization.html" style="color: black;border-color: darkred">Organization</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="superpower.html">Superpower</a>
+            <a class="btn btn-outline-primary btn-lg" href="superpower.html" style="color: black;border-color: darkred">Superpower</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="sighting.html">Sightings</a>
+            <a class="btn btn-outline-primary btn-lg" href="sighting.html" style="color: black;border-color: darkred">Sightings</a>
         </div>
     </div>
 </div>
@@ -53,7 +53,7 @@
                 </div>
             </div>
 
-            <button class="btn btn-primary" type="submit">Add Superpower</button>
+            <button class="btn btn-primary" type="submit" style="color: white ; background-color: darkred; border-style: none">Add Superpower</button>
         </form>
     </div>
 </div>
@@ -65,8 +65,8 @@
             <tr>
                 <th>Superpower ID</th>
                 <th>Superpower Name</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th></th>
+                <th></th>
 
             </tr>
             </thead>
@@ -75,8 +75,8 @@
             <tr th:each="superpower : ${superpowers}">
                 <td th:text="${superpower.id}">Superpower ID</td>
                 <td th:text="${superpower.name}">Superpower Name</td>
-                <td><a href="#" th:href="@{/editSuperpower.html(id=${superpower.id})}">Edit</a></td>
-                <td><a href="#" th:href="@{/deleteSuperpower(id=${superpower.id})}">Delete</a></td>
+                <td><a href="#" th:href="@{/editSuperpower.html(id=${superpower.id})}" style="color: darkred ">Edit</a></td>
+                <td><a href="#" th:href="@{/deleteSuperpower(id=${superpower.id})}" style="color: darkred ">Delete</a></td>
             </tr>
             </tbody>
         </table>
