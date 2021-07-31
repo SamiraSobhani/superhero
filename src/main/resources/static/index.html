@@ -21,19 +21,19 @@
     </div>
     <div class="row m-4 border border-dark">
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="superhero.html">Superhero</a>
+            <a class="btn btn-outline-primary btn-lg" href="superhero.html" style="color: black;border-color: darkred">Superhero</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="location.html">Location</a>
+            <a class="btn btn-outline-primary btn-lg" href="location.html" style="color: black;border-color: darkred">Location</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="organization.html">Organization</a>
+            <a class="btn btn-outline-primary btn-lg" href="organization.html" style="color: black;border-color: darkred">Organization</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="superpower.html">Superpower</a>
+            <a class="btn btn-outline-primary btn-lg" href="superpower.html" style="color: black;border-color: darkred">Superpower</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="sighting.html">Sighting</a>
+            <a class="btn btn-outline-primary btn-lg" href="sighting.html" style="color: black;border-color: darkred">Sighting</a>
         </div>
     </div>
 
@@ -52,7 +52,7 @@
                 <tr th:each="sighting : ${sightings}">
                     <td th:text="${sighting.superhero_id}">Superhero Name</td>
                     <td th:text="${sighting.location_id}">Location Name</td>
-                    <td th:text="${sighting.date}">Date</td>
+                    <td th:text="${sighting.date}" style="color: darkred ">Date</td>
                 </tr>
                 </tbody>
             </table>

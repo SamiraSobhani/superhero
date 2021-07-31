@@ -15,24 +15,24 @@
 <div class="container">
     <div class="row m-4">
         <div class="col text-center border border-dark">
-            <h1 ><a href="index.html">Superhero Manager</a></h1>
+            <h1 ><a href="index.html" style="color: black">Superhero Manager</a></h1>
         </div>
     </div>
     <div class="row m-4 border border-dark">
         <div class="col text-center m-2">
-            <a href="superhero.html" class="btn btn-outline-primary btn-lg">Superhero</a>
+            <a href="superhero.html" class="btn btn-outline-primary btn-lg" style="color: black;border-color: darkred">Superhero</a>
         </div>
         <div class="col text-center m-2">
-            <a href="location.html" class="btn btn-outline-primary btn-lg">Location</a>
+            <a href="location.html" class="btn btn-outline-primary btn-lg" style="color: black;border-color: darkred">Location</a>
         </div>
         <div class="col text-center m-2">
-            <a href="organization.html" class="btn btn-outline-primary btn-lg">Organization</a>
+            <a href="organization.html" class="btn btn-outline-primary btn-lg" style="color: black;border-color: darkred">Organization</a>
         </div>
         <div class="col text-center m-2">
-            <a href="superpower.html" class="btn btn-outline-primary btn-lg">Superpower</a>
+            <a href="superpower.html" class="btn btn-outline-primary btn-lg" style="color: black;border-color: darkred">Superpower</a>
         </div>
         <div class="col text-center m-2">
-            <a href="sighting.html" class="btn btn-outline-primary btn-lg">Sightings</a>
+            <a href="sighting.html" class="btn btn-outline-primary btn-lg" style="color: black;border-color: darkred">Sightings</a>
         </div>
     </div>
 </div>
@@ -73,7 +73,7 @@
                     <input class="form-control" id="longitude" name="longitude" type="text"/>
                 </div>
             </div>
-            <button class="btn btn-primary"  type="submit">Add Location</button>
+            <button class="btn btn-primary"  type="submit" style="color: white ; background-color: darkred; border-style: none">Add Location</button>
         </form>
     </div>
 </div>
@@ -90,8 +90,8 @@
                 <th>Address</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -102,8 +102,8 @@
                 <td th:text="${location.address}">Location Address</td>
                 <td th:text="${location.latitude}">Location Latitude</td>
                 <td th:text="${location.longitude}">Location Longitude</td>
-                <td><a href="#" th:href="@{/editLocation.html(id=${location.id})}">Edit</a></td>
-                <td><a href="#" th:href="@{/deleteLocation(id=${location.id})}">Delete</a></td>
+                <td><a href="#" th:href="@{/editLocation.html(id=${location.id})}" style="color: darkred ">Edit</a></td>
+                <td><a href="#" th:href="@{/deleteLocation(id=${location.id})}" style="color: darkred ">Delete</a></td>
             </tr>
             </tbody>
         </table>
