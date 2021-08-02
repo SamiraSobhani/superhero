@@ -15,7 +15,7 @@
 
 <div class="container">
     <div class="row m-4">
-        <div class="col text-center border border-dark" >
+        <div class="col text-center border border-dark" style="border-radius: 0.5rem;" >
             <h1 ><a href="index.html" style="color: black">Superhero Manager</a></h1>
         </div>
     </div>
@@ -74,7 +74,7 @@
 </div>
 
 
-<div class="row m-4 border border-dark">
+<div class="row m-4 border border-dark" style="border-radius: 0.5rem;">
     <div class="col text-center m-3">
         <table class="table table-striped">
             <thead>
@@ -94,8 +94,8 @@
                 <td th:text="${organization.name}">organization Name</td>
                 <td th:text="${organization.description}">organization Description</td>
                 <td th:text="${organization.contact}">organization Contact</td>
-                <td><a href="#" th:href="@{/editOrganization.html(id=${organization.id})}" style="color: darkred ">Edit</a></td>
-                <td><a href="#" th:href="@{/deleteOrganization(id=${organization.id})}" style="color: darkred ">Delete</a></td>
+                <td><a href="#" th:href="@{/editOrganization.html(id=${organization.id})}" style="color: darkred;font-weight:bold ">Edit</a></td>
+                <td><a href="#" th:href="@{/deleteOrganization(id=${organization.id})}" style="color: darkred ;font-weight:bold ">Delete</a></td>
             </tr>
             </tbody>
         </table>

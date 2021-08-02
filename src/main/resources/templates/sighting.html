@@ -9,6 +9,7 @@
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" rel="stylesheet">
     <title>sighting</title>
+
 </head>
 
 <body>
@@ -19,9 +20,9 @@
             <h1 ><a href="index.html" style="color: black">Superhero Manager</a></h1>
         </div>
     </div>
-    <div class="row m-4 border border-dark">
-        <div  class="col text-center m-2">
-            <a  class="btn btn-outline-primary btn-lg" href="superhero.html" style="color: black;border-color: darkred">Superhero</a>
+    <div class="row m-4 border border-dark" >
+        <div  class="col text-center m-2" >
+            <a class="btn btn-outline-primary btn-lg" href="superhero.html" style="color: darkred;border-color:black;">Superhero</a>
         </div>
         <div class="col text-center m-2">
             <a class="btn btn-outline-primary btn-lg" href="location.html" style="color: black;border-color: darkred">Location</a>
@@ -39,7 +40,7 @@
 </div>
 
 
-<div class="row m-4 border border-dark">
+<div class="row m-4 border border-dark" style="border-radius: 0.5rem;">
     <div class="col-3 text-center m-3">
         <span class="h3">Add Sighting</span>
     </div>
@@ -90,7 +91,7 @@
 </div>
 
 
-<div class="row m-4 border border-dark">
+<div class="row m-4 border border-dark" style="border-radius: 0.5rem;">
     <div class="col text-center m-3">
         <table class="table table-striped">
             <thead>
@@ -108,8 +109,8 @@
                 <td th:text="${test.lName}">Location Name</td>
                 <td th:text="${test.sDate}">Date</td>
 
-                <td><a href="#" th:href="@{/editSighting.html(location_id= ${test.locationId}, superhero_id=${test.superheroId}, date=${test.sDate})}" style="color: darkred ">Edit</a></td>
-                <td><a href="#" th:href="@{/deleteSighting(location_id=${test.locationId}, superhero_id=${test.superheroId}, date=${test.sDate})}" style="color: darkred ">Delete</a></td>
+                <td><a href="#" th:href="@{/editSighting.html(location_id= ${test.locationId}, superhero_id=${test.superheroId}, date=${test.sDate})}" style="color: darkred ;font-weight:bold  ">Edit</a></td>
+                <td><a href="#" th:href="@{/deleteSighting(location_id=${test.locationId}, superhero_id=${test.superheroId}, date=${test.sDate})}" style="color: darkred;font-weight:bold  ">Delete</a></td>
             </tr>
             </tbody>
         </table>
