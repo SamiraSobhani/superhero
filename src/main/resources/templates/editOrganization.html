@@ -10,32 +10,32 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <title>editOrganization</title>
 </head>
-<body>
+<body style="background-color:lightgrey">
 
 <div class="container">
     <div class="row m-4">
-        <div class="col text-center border border-dark">
-            <h1 style={color: black}><a href="index.html">Superhero Manager</a></h1>
+        <div class="col text-center border border-dark" style="border-radius: 0.5rem;">
+            <h1 ><a style="color: black" href="index.html">Superhero Manager</a></h1>
         </div>
     </div>
     <div class="row m-4 border border-dark">
         <div class="col text-center m-2">
-            <a href="superhero.html" class="btn btn-outline-primary btn-lg">Superhero</a>
+            <a href="superhero.html" class="btn btn-outline-primary btn-lg"style="color: black;border-color: darkred">Superhero</a>
         </div>
         <div class="col text-center m-2">
-            <a href="location.html" class="btn btn-outline-primary btn-lg">Location</a>
+            <a href="location.html" class="btn btn-outline-primary btn-lg"style="color: black;border-color: darkred">Location</a>
         </div>
         <div class="col text-center m-2">
-            <a href="organization.html" class="btn btn-outline-primary btn-lg">Organization</a>
+            <a href="organization.html" class="btn btn-outline-primary btn-lg"style="color: black;border-color: darkred">Organization</a>
         </div>
         <div class="col text-center m-2">
-            <a href="superpower.html" class="btn btn-outline-primary btn-lg">Superpower</a>
+            <a href="superpower.html" class="btn btn-outline-primary btn-lg"style="color: black;border-color: darkred">Superpower</a>
         </div>
         <div class="col text-center m-2">
-            <a href="sighting.html" class="btn btn-outline-primary btn-lg">Sightings</a>
+            <a href="sighting.html" class="btn btn-outline-primary btn-lg"style="color: black;border-color: darkred">Sightings</a>
         </div>
     </div>
-    <div class="row m-4 border border-dark">
+    <div class="row m-4 border border-dark" style="border-radius: 0.5rem;">
         <div class="col-3 text-center m-3">
             <span class="h3">Edit Organization</span>
         </div>
@@ -67,7 +67,7 @@
                 </div>
                 <input type="hidden" name="id" th:value="${organization.id}"/>
 
-                <button type="submit" class="btn btn-primary">Update Organization</button>
+                <button type="submit" class="btn btn-primary"style="color: white ; background-color: darkred; border-style: none">Update Organization</button>
             </form>
         </div>
     </div>
