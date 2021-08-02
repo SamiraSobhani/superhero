@@ -37,7 +37,7 @@
     </div>
 </div>
 
-<div class="row m-4 border border-dark">
+<div class="row m-4 border border-dark" style="border-radius: 0.5rem;">
     <div class="col-3 text-center m-3">
         <span class="h3">Add Location</span>
     </div>
@@ -79,7 +79,7 @@
 </div>
 
 
-<div class="row m-4 border border-dark">
+<div class="row m-4 border border-dark"style="border-radius: 0.5rem;">
     <div class="col text-center m-3">
         <table class="table table-striped">
             <thead>
@@ -102,8 +102,8 @@
                 <td th:text="${location.address}">Location Address</td>
                 <td th:text="${location.latitude}">Location Latitude</td>
                 <td th:text="${location.longitude}">Location Longitude</td>
-                <td><a href="#" th:href="@{/editLocation.html(id=${location.id})}" style="color: darkred ">Edit</a></td>
-                <td><a href="#" th:href="@{/deleteLocation(id=${location.id})}" style="color: darkred ">Delete</a></td>
+                <td><a href="#" th:href="@{/editLocation.html(id=${location.id})}" style="color: darkred;font-weight:bold ">Edit</a></td>
+                <td><a href="#" th:href="@{/deleteLocation(id=${location.id})}" style="color: darkred ;font-weight:bold">Delete</a></td>
             </tr>
             </tbody>
         </table>

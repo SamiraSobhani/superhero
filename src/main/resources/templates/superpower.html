@@ -38,7 +38,7 @@
     </div>
 </div>
 
-<div class="row m-4 border border-dark">
+<div class="row m-4 border border-dark"  style="border-radius: 0.5rem;">
     <div class="col-3 text-center m-3">
         <span class="h3">Add Superpower</span>
     </div>
@@ -58,7 +58,7 @@
     </div>
 </div>
 
-<div class="row m-4 border border-dark">
+<div class="row m-4 border border-dark"  style="border-radius: 0.5rem;">
     <div class="col text-center m-3">
         <table class="table table-striped">
             <thead>
@@ -75,8 +75,8 @@
             <tr th:each="superpower : ${superpowers}">
                 <td th:text="${superpower.id}">Superpower ID</td>
                 <td th:text="${superpower.name}">Superpower Name</td>
-                <td><a href="#" th:href="@{/editSuperpower.html(id=${superpower.id})}" style="color: darkred ">Edit</a></td>
-                <td><a href="#" th:href="@{/deleteSuperpower(id=${superpower.id})}" style="color: darkred ">Delete</a></td>
+                <td><a href="#" th:href="@{/editSuperpower.html(id=${superpower.id})}" style="color: darkred ;font-weight:bold">Edit</a></td>
+                <td><a href="#" th:href="@{/deleteSuperpower(id=${superpower.id})}" style="color: darkred ;font-weight:bold">Delete</a></td>
             </tr>
             </tbody>
         </table>
