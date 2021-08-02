@@ -14,29 +14,29 @@
 
 <div class="container">
     <div class="row m-4">
-        <div class="col text-center border border-dark">
-            <h1 style={color: black}><a href="index.html">Superhero Manager</a></h1>
+        <div class="col text-center border border-dark" style="border-radius: 0.5rem;">
+            <h1 style={color: black}><a style="color: black" href="index.html">Superhero Manager</a></h1>
         </div>
     </div>
     <div class="row m-4 border border-dark">
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="superhero.html">Superhero</a>
+            <a class="btn btn-outline-primary btn-lg" href="superhero.html" style="color: black;border-color: darkred">Superhero</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="location.html">Location</a>
+            <a class="btn btn-outline-primary btn-lg" href="location.html"style="color: black;border-color: darkred">Location</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="organization.html">Organization</a>
+            <a class="btn btn-outline-primary btn-lg" href="organization.html"style="color: black;border-color: darkred">Organization</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="superpower.html">Superpower</a>
+            <a class="btn btn-outline-primary btn-lg" href="superpower.html"style="color: black;border-color: darkred">Superpower</a>
         </div>
         <div class="col text-center m-2">
-            <a class="btn btn-outline-primary btn-lg" href="sighting.html">Sightings</a>
+            <a class="btn btn-outline-primary btn-lg" href="sighting.html"style="color: black;border-color: darkred">Sightings</a>
         </div>
     </div>
 
-    <div class="row m-4 border border-dark">
+    <div class="row m-4 border border-dark" style="border-radius: 0.5rem;">
         <div class="col-3 text-center m-3">
             <span class="h3">Edit Superhero</span>
         </div>
@@ -84,7 +84,7 @@
                 </div>
 
                 <input name="id" th:value="${superhero.id}" type="hidden"/>
-                <button class="btn btn-primary" type="submit">
+                <button style="color: white ; background-color: darkred; border-style: none"class="btn btn-primary" type="submit">
                     Update Superhero
                 </button>
             </form>
