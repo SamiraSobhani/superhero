@@ -1,2 +1,2 @@
 # superhero
-front&amp; back&amp; database.
+front&amp; back&amp; database
